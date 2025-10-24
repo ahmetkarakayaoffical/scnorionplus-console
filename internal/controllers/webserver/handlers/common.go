@@ -5,12 +5,12 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/ahmetkarakayaoffical/ent"
+	model "github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models/servers"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/ent"
-	model "github.com/open-uem/openuem-console/internal/models/servers"
-	"github.com/open-uem/openuem-console/internal/views"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 )
 
 func (h *Handler) GetCommonInfo(c echo.Context) (*partials.CommonInfo, error) {

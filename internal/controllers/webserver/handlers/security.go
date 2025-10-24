@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"log"
 
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/security_views"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
-	"github.com/open-uem/openuem-console/internal/views/security_views"
 )
 
 func (h *Handler) ListAntivirusStatus(c echo.Context) error {
@@ -236,7 +236,7 @@ func (h *Handler) GetSystemUpdatesFilters(c echo.Context) (*filters.SystemUpdate
 	}
 	f.PendingUpdateOptions = filteredPendingUpdates
 
-	availableUpdateStatus := openuem_nats.SystemUpdatePossibleStatus()
+	availableUpdateStatus := scnorionplus_nats.SystemUpdatePossibleStatus()
 	filteredUpdateStatus := []string{}
 	for index := range availableUpdateStatus {
 		value := c.FormValue(fmt.Sprintf("filterByUpdateStatus%d", index))

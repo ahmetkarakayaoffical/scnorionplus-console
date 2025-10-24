@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	ent "github.com/open-uem/ent"
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/layout"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	ent "github.com/ahmetkarakayaoffical/ent"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/layout"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"strconv"
 )
 
@@ -302,7 +302,7 @@ templ NewTenant(c echo.Context, defaultCountry string, agentsExists, serversExis
 	</main>
 }
 
-templ EditTenant(c echo.Context, t *openuem_ent.Tenant, defaultCountry string, agentsExists, serversExists bool, commonInfo *partials.CommonInfo) {
+templ EditTenant(c echo.Context, t *scnorionplus_ent.Tenant, defaultCountry string, agentsExists, serversExists bool, commonInfo *partials.CommonInfo) {
 	@partials.Header(c, []partials.Breadcrumb{{Title: i18n.T(ctx, "Global Config"), Url: "/admin/tenants"}, {Title: i18n.T(ctx, "Tenant.other"), Url: "/admin/tenants"}}, commonInfo)
 	<main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
 		<div class="uk-width-1-2@m uk-card uk-card-default">

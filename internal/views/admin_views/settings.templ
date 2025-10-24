@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/ent"
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/openuem-console/internal/views/layout"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/layout"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"strconv"
 )
 
-templ GeneralSettings(c echo.Context, settings *openuem_ent.Settings, agentsExists, serversExists bool, tags []*ent.Tag, commonInfo *partials.CommonInfo, tenantName string, successMessage string) {
+templ GeneralSettings(c echo.Context, settings *scnorionplus_ent.Settings, agentsExists, serversExists bool, tags []*ent.Tag, commonInfo *partials.CommonInfo, tenantName string, successMessage string) {
 	if commonInfo.TenantID == "-1" {
 		@partials.Header(c, []partials.Breadcrumb{{Title: i18n.T(ctx, "Global Config"), Url: "/admin/users"}, {Title: i18n.T(ctx, "General Settings"), Url: "/admin/settings"}}, commonInfo)
 	} else {

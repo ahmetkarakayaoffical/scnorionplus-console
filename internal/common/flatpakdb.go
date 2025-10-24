@@ -31,7 +31,7 @@ func (w *Worker) StartFlatpakDBDownloadJob() error {
 }
 
 func (w *Worker) DownloaFlatpakDB() error {
-	url := "https://downloads.openuem.eu/flatpak/flatpak.db"
+	url := "https://downloads.scncore.com/flatpak/flatpak.db"
 
 	// If we're in development don't download
 	if os.Getenv("DEVEL") == "true" {

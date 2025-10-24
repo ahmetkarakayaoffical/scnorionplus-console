@@ -5,13 +5,13 @@ import (
 	"strconv"
 
 	"entgo.io/ent/dialect/sql"
-	ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/app"
-	"github.com/open-uem/ent/site"
-	"github.com/open-uem/ent/tenant"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/app"
+	"github.com/ahmetkarakayaoffical/ent/site"
+	"github.com/ahmetkarakayaoffical/ent/tenant"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 )
 
 type App struct {

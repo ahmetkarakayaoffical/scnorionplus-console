@@ -8,5 +8,5 @@ node_modules
 *.key
 .vscode
 PIDFILE
-openuem-console
+scnorionplus-console
 .air.toml

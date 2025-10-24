@@ -6,12 +6,12 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/authserver/handlers"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/router"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/sessions"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/utils"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/openuem-console/internal/controllers/authserver/handlers"
-	"github.com/open-uem/openuem-console/internal/controllers/router"
-	"github.com/open-uem/openuem-console/internal/controllers/sessions"
-	"github.com/open-uem/openuem-console/internal/models"
-	"github.com/open-uem/utils"
 )
 
 type AuthServer struct {

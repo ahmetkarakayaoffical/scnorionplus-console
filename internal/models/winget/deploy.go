@@ -8,10 +8,10 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 )
 
 func SearchPackages(packageName string, p partials.PaginationAndSort, dbFolder string, f filters.DeployPackageFilter) ([]nats.SoftwarePackage, error) {

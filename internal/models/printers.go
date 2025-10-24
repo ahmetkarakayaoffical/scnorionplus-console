@@ -4,11 +4,11 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/printer"
-	"github.com/open-uem/ent/site"
-	"github.com/open-uem/ent/tenant"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/printer"
+	"github.com/ahmetkarakayaoffical/ent/site"
+	"github.com/ahmetkarakayaoffical/ent/tenant"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 )
 
 func (m *Model) CountDifferentPrinters(c *partials.CommonInfo) (int, error) {

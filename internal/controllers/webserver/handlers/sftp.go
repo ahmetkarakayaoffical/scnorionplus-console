@@ -14,11 +14,11 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/computers_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/utils"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/openuem-console/internal/views/computers_views"
-	"github.com/open-uem/openuem-console/internal/views/partials"
-	"github.com/open-uem/utils"
 	"github.com/pkg/sftp"
 	"golang.org/x/crypto/ssh"
 )
@@ -570,7 +570,7 @@ func (h *Handler) DownloadFolderAsZIP(c echo.Context) error {
 	defer client.Close()
 	defer sshConn.Close()
 
-	file, err := os.CreateTemp(h.DownloadDir, "openuem")
+	file, err := os.CreateTemp(h.DownloadDir, "scnorionplus")
 	if err != nil {
 		return RenderError(c, partials.ErrorMessage(err.Error(), false))
 	}
@@ -648,7 +648,7 @@ func (h *Handler) DownloadManyAsZIP(c echo.Context) error {
 	defer client.Close()
 	defer sshConn.Close()
 
-	file, err := os.CreateTemp(h.DownloadDir, "openuem")
+	file, err := os.CreateTemp(h.DownloadDir, "scnorionplus")
 	if err != nil {
 		return RenderError(c, partials.ErrorMessage(err.Error(), false))
 	}

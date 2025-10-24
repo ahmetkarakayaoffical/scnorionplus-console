@@ -7,7 +7,7 @@ steps:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       platforms: linux/amd64
-      repo: openuem/openuem-console
+      repo: scnorionplus/scnorionplus-console
       tags:
         - 0.9.0
         - latest

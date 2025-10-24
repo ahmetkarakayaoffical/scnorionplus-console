@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	ent "github.com/open-uem/ent"
-	openuem_ent "github.com/open-uem/ent"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/layout"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	ent "github.com/ahmetkarakayaoffical/ent"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/scnorionplus-console/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console//internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console//internal/views/layout"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console//internal/views/partials"
 	"strings"
 )
 
@@ -128,7 +128,7 @@ templ Users(c echo.Context, p partials.PaginationAndSort, f filters.UserFilter, 
 											<div class="flex gap-1 items-center">
 												<span>{ i18n.T(ctx, "users.register") }</span>
 												@partials.SortByColumnIcon(c, p, i18n.T(ctx, "users.register"), "register", "alpha", "#main", "outerHTML", "get")
-												@filters.FilterByOptions(c, p, "RegisterStatus", "users.filter_by_register_status", openuem_nats.RegisterPossibleStatus(), f.RegisterOptions, "#main", "outerHTML", true, func() bool {
+												@filters.FilterByOptions(c, p, "RegisterStatus", "users.filter_by_register_status", scnorionplus_nats.RegisterPossibleStatus(), f.RegisterOptions, "#main", "outerHTML", true, func() bool {
 													return len(f.RegisterOptions) == 0
 												})
 											</div>
@@ -262,7 +262,7 @@ templ Users(c echo.Context, p partials.PaginationAndSort, f filters.UserFilter, 
 															</a>
 														</li>
 													}
-													if !user.Openid && user.EmailVerified && user.Register == openuem_nats.REGISTER_IN_REVIEW {
+													if !user.Openid && user.EmailVerified && user.Register == scnorionplus_nats.REGISTER_IN_REVIEW {
 														<li>
 															<a
 																hx-post={ string(templ.URL(fmt.Sprintf("/admin/users/%s/certificate", user.ID))) }
@@ -274,7 +274,7 @@ templ Users(c echo.Context, p partials.PaginationAndSort, f filters.UserFilter, 
 															</a>
 														</li>
 													}
-													if !user.Openid && user.EmailVerified && user.Register != openuem_nats.REGISTER_IN_REVIEW {
+													if !user.Openid && user.EmailVerified && user.Register != scnorionplus_nats.REGISTER_IN_REVIEW {
 														<li>
 															<a
 																hx-target="#main"
@@ -286,7 +286,7 @@ templ Users(c echo.Context, p partials.PaginationAndSort, f filters.UserFilter, 
 															</a>
 														</li>
 													}
-													if user.Openid && user.Register == openuem_nats.REGISTER_IN_REVIEW {
+													if user.Openid && user.Register == scnorionplus_nats.REGISTER_IN_REVIEW {
 														<li>
 															<a
 																hx-post={ string(templ.URL(fmt.Sprintf("/admin/users/%s/approve", user.ID))) }
@@ -445,7 +445,7 @@ templ NewUser(c echo.Context, defaultCountry string, agentsExists, serversExists
 	</main>
 }
 
-templ EditUser(c echo.Context, user *openuem_ent.User, defaultCountry string, agentsExists, serversExists bool, commonInfo *partials.CommonInfo, settings *ent.Authentication) {
+templ EditUser(c echo.Context, user *scnorionplus_ent.User, defaultCountry string, agentsExists, serversExists bool, commonInfo *partials.CommonInfo, settings *ent.Authentication) {
 	@partials.Header(c, []partials.Breadcrumb{{Title: i18n.T(ctx, "Global Config"), Url: "/admin/users"}, {Title: "Users", Url: "/admin/users"}}, commonInfo)
 	<main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
 		<div class="uk-width-1-2@m uk-card uk-card-default">

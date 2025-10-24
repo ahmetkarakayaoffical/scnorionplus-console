@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/enttest"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"golang.org/x/crypto/ocsp"
@@ -46,7 +46,7 @@ func (suite *CertificatesTestSuite) TestGetCertificateByUID() {
 
 	_, err = suite.model.GetCertificateByUID("user7")
 	assert.Error(suite.T(), err, "should not get certificate by uid")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *CertificatesTestSuite) TestGetCertificateBySerial() {
@@ -57,11 +57,11 @@ func (suite *CertificatesTestSuite) TestGetCertificateBySerial() {
 
 	_, err = suite.model.GetCertificateBySerial("7")
 	assert.Error(suite.T(), err, "should not get certificate by serial")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *CertificatesTestSuite) TestRevokeCertificate() {
-	err := suite.model.RevokeCertificate(&openuem_ent.Certificate{
+	err := suite.model.RevokeCertificate(&scnorionplus_ent.Certificate{
 		ID: int64(1),
 	}, "test", ocsp.CessationOfOperation)
 	assert.NoError(suite.T(), err, "should revoke certificate")
@@ -77,7 +77,7 @@ func (suite *CertificatesTestSuite) TestDeleteCertificate() {
 
 	err = suite.model.DeleteCertificate(int64(8))
 	assert.Error(suite.T(), err, "should not delete non existent certificate")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *CertificatesTestSuite) TestCountAllCertificates() {

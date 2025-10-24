@@ -4,12 +4,12 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/open-uem/ent"
-	"github.com/open-uem/ent/profile"
-	"github.com/open-uem/ent/profileissue"
-	"github.com/open-uem/ent/site"
-	"github.com/open-uem/ent/tenant"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/profile"
+	"github.com/ahmetkarakayaoffical/ent/profileissue"
+	"github.com/ahmetkarakayaoffical/ent/site"
+	"github.com/ahmetkarakayaoffical/ent/tenant"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 )
 
 func (m *Model) CountAllProfiles(c *partials.CommonInfo) (int, error) {

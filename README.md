@@ -1,20 +1,58 @@
-# OpenUEM - Console
+# SCNOrion Plus - Console
 
-![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
+![License](https://img.shields.io/badge/License-Proprietary-red.svg)
 
-The Console is OpenUEM's Web User Interface
+SCNOrion Plus Console, kurumsal düzeyde uç nokta yönetimi için geliştirilmiş modern web arayüzüdür.
 
-![OpenUEM console](https://github.com/user-attachments/assets/795cf36c-91ed-40e2-8b3a-abcff5d46305)
+![SCNOrion Plus Console](assets/console-screenshot.png)
 
-The console allows you to perform the following actions:
+## Temel Özellikler
 
-- Admit, enable or disable an agent that contacts OpenUEM Agent Workers
-- Browse an endpoint's information gathered by an agent
-- Start a VNC remote assistance session
-- Browse the files contained in an endpoint's logical disks
-- Deploy a package to an endpoint using Winget. You can also uninstalled packages deployed by OpenUEM
-- Create profiles to automate tasks to deploy software and manage settings (registry, local user, local groups...)
-- Wake On Lan, power off and reboot endpoints
-- Get statistics and check the status of the different OpenUEM components
+### 🖥️ Agent Yönetimi
+- Agent durumlarını izleme ve yönetme
+- Otomatik agent dağıtımı ve güncelleme
+- Agent sağlık durumu takibi
 
-Now more about the console in [OpenUEM documentation](https://openuem.eu/docs/Console/intro)
+### 📦 Yazılım Yönetimi
+- WinGet üzerinden yazılım dağıtımı
+- Toplu yazılım dağıtım politikaları
+- Yazılım kaldırma ve güncelleme
+
+### 🔄 Sistem Yönetimi
+- Uzaktan VNC bağlantısı
+- Dosya sistemi yönetimi
+- Sistem bilgisi görüntüleme
+- Uzaktan güç yönetimi (WOL, kapatma, yeniden başlatma)
+
+### ⚙️ Profil Yönetimi
+- Otomatik görev oluşturma
+- Registry ayarları yönetimi
+- Yerel kullanıcı ve grup yönetimi
+- Politika tabanlı yapılandırma
+
+## İzleme ve Raporlama
+
+- Gerçek zamanlı sistem durumu izleme
+- Detaylı bileşen durumu takibi
+- Özelleştirilebilir dashboard
+- Performans metrikleri ve raporlama
+
+## Sistem Gereksinimleri
+
+- Windows Server 2019/2022
+- Minimum 4GB RAM
+- 100GB disk alanı
+- .NET Core 7.0+
+- Modern web tarayıcısı (Chrome, Edge, Firefox)
+
+## İletişim ve Destek
+
+Daha detaylı bilgi ve dokümantasyon için:
+
+🌐 [Website](https://www.scnorionplus.com)
+📚 [Dokümantasyon](https://docs.scnorionplus.com)
+📧 [Destek](mailto:support@scnorionplus.com)
+
+## Lisans
+
+Copyright © 2025 SCNOrion Plus. Tüm hakları saklıdır.

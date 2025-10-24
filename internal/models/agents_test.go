@@ -7,12 +7,11 @@ import (
 	"testing"
 	"time"
 
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/enttest"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -115,9 +114,9 @@ func (suite *AgentsTestSuite) SetupTest() {
 		}
 
 		if i%3 == 0 {
-			query.SetSystemUpdateStatus(openuem_nats.NOTIFY_BEFORE_DOWNLOAD)
+			query.SetSystemUpdateStatus(scnorionplus_nats.NOTIFY_BEFORE_DOWNLOAD)
 		} else {
-			query.SetSystemUpdateStatus(openuem_nats.NOTIFY_BEFORE_INSTALLATION)
+			query.SetSystemUpdateStatus(scnorionplus_nats.NOTIFY_BEFORE_INSTALLATION)
 		}
 
 		err := query.SetOwnerID(fmt.Sprintf("agent%d", i)).Exec(context.Background())
@@ -260,7 +259,7 @@ func (suite *AgentsTestSuite) TestGetAgentById() {
 
 	_, err = suite.model.GetAgentById("agent7", suite.commonInfo)
 	assert.Error(suite.T(), err, "should not get agent by id")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise is not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise is not found error")
 }
 
 func (suite *AgentsTestSuite) TestCountAllAgents() {

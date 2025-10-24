@@ -1,10 +1,10 @@
 package handlers
 
 import (
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/computers_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/openuem-console/internal/views/computers_views"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 )
 
 func (h *Handler) Nickname(c echo.Context) error {

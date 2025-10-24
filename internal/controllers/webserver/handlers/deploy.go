@@ -7,13 +7,13 @@ import (
 	"strconv"
 	"strings"
 
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	models "github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models/winget"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/deploy_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	openuem_nats "github.com/open-uem/nats"
-	models "github.com/open-uem/openuem-console/internal/models/winget"
-	"github.com/open-uem/openuem-console/internal/views/deploy_views"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 )
 
 func (h *Handler) DeployInstall(c echo.Context) error {
@@ -215,7 +215,7 @@ func (h *Handler) DeployPackageToSelectedAgents(c echo.Context) error {
 	}
 
 	for _, agent := range agents {
-		action := openuem_nats.DeployAction{
+		action := scnorionplus_nats.DeployAction{
 			AgentId:     agent,
 			PackageId:   packageId,
 			PackageName: packageName,

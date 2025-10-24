@@ -5,17 +5,17 @@ import (
 	"strconv"
 	"time"
 
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/certificate"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent/certificate"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
+	scnorionplus_ent "github.com/open-uem/ent"
 )
 
-func (m *Model) GetCertificateByUID(uid string) (*openuem_ent.Certificate, error) {
+func (m *Model) GetCertificateByUID(uid string) (*scnorionplus_ent.Certificate, error) {
 	return m.Client.Certificate.Query().Where(certificate.UID(uid)).Only(context.Background())
 }
 
-func (m *Model) GetCertificateBySerial(serial string) (*openuem_ent.Certificate, error) {
+func (m *Model) GetCertificateBySerial(serial string) (*scnorionplus_ent.Certificate, error) {
 	serialNumber, err := strconv.ParseInt(serial, 10, 64)
 	if err != nil {
 		return nil, err
@@ -24,7 +24,7 @@ func (m *Model) GetCertificateBySerial(serial string) (*openuem_ent.Certificate,
 	return m.Client.Certificate.Query().Where(certificate.ID(serialNumber)).Only(context.Background())
 }
 
-func (m *Model) RevokeCertificate(cert *openuem_ent.Certificate, info string, reason int) error {
+func (m *Model) RevokeCertificate(cert *scnorionplus_ent.Certificate, info string, reason int) error {
 	return m.Client.Revocation.Create().SetID(cert.ID).SetExpiry(cert.Expiry).SetRevoked(time.Now()).SetReason(reason).SetInfo(info).Exec(context.Background())
 }
 
@@ -50,7 +50,7 @@ func (m *Model) CountCertificatesAboutToexpire() (int, error) {
 	return m.Client.Certificate.Query().Where(certificate.ExpiryLT(time.Now().AddDate(0, 2, 0))).Count(context.Background())
 }
 
-func (m *Model) GetCertificatesByPage(p partials.PaginationAndSort, f filters.CertificateFilter) ([]*openuem_ent.Certificate, error) {
+func (m *Model) GetCertificatesByPage(p partials.PaginationAndSort, f filters.CertificateFilter) ([]*scnorionplus_ent.Certificate, error) {
 	query := m.Client.Certificate.Query().Limit(p.PageSize).Offset((p.CurrentPage - 1) * p.PageSize)
 
 	// Apply filters
@@ -59,36 +59,36 @@ func (m *Model) GetCertificatesByPage(p partials.PaginationAndSort, f filters.Ce
 	switch p.SortBy {
 	case "serial":
 		if p.SortOrder == "asc" {
-			query = query.Order(openuem_ent.Asc(certificate.FieldID))
+			query = query.Order(scnorionplus_ent.Asc(certificate.FieldID))
 		} else {
-			query = query.Order(openuem_ent.Desc(certificate.FieldID))
+			query = query.Order(scnorionplus_ent.Desc(certificate.FieldID))
 		}
 	case "type":
 		if p.SortOrder == "asc" {
-			query = query.Order(openuem_ent.Asc(certificate.FieldType))
+			query = query.Order(scnorionplus_ent.Asc(certificate.FieldType))
 		} else {
-			query = query.Order(openuem_ent.Desc(certificate.FieldType))
+			query = query.Order(scnorionplus_ent.Desc(certificate.FieldType))
 		}
 	case "description":
 		if p.SortOrder == "asc" {
-			query = query.Order(openuem_ent.Asc(certificate.FieldDescription))
+			query = query.Order(scnorionplus_ent.Asc(certificate.FieldDescription))
 		} else {
-			query = query.Order(openuem_ent.Desc(certificate.FieldDescription))
+			query = query.Order(scnorionplus_ent.Desc(certificate.FieldDescription))
 		}
 	case "expiry":
 		if p.SortOrder == "asc" {
-			query = query.Order(openuem_ent.Asc(certificate.FieldExpiry))
+			query = query.Order(scnorionplus_ent.Asc(certificate.FieldExpiry))
 		} else {
-			query = query.Order(openuem_ent.Desc(certificate.FieldExpiry))
+			query = query.Order(scnorionplus_ent.Desc(certificate.FieldExpiry))
 		}
 	case "username":
 		if p.SortOrder == "asc" {
-			query = query.Order(openuem_ent.Asc(certificate.FieldUID))
+			query = query.Order(scnorionplus_ent.Asc(certificate.FieldUID))
 		} else {
-			query = query.Order(openuem_ent.Desc(certificate.FieldUID))
+			query = query.Order(scnorionplus_ent.Desc(certificate.FieldUID))
 		}
 	default:
-		query = query.Order(openuem_ent.Desc(certificate.FieldID))
+		query = query.Order(scnorionplus_ent.Desc(certificate.FieldID))
 	}
 
 	return query.All(context.Background())
@@ -98,7 +98,7 @@ func (m *Model) GetCertificatesTypes() ([]string, error) {
 	return m.Client.Certificate.Query().Unique(true).Select(certificate.FieldType).Strings(context.Background())
 }
 
-func applyCertificateFilters(query *openuem_ent.CertificateQuery, f filters.CertificateFilter) {
+func applyCertificateFilters(query *scnorionplus_ent.CertificateQuery, f filters.CertificateFilter) {
 
 	if len(f.TypeOptions) > 0 {
 		selectedTypes := []certificate.Type{}

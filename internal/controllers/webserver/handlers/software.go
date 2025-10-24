@@ -3,11 +3,11 @@ package handlers
 import (
 	"log"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/software_views"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/openuem-console/internal/models"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
-	"github.com/open-uem/openuem-console/internal/views/software_views"
 )
 
 func (h *Handler) Software(c echo.Context) error {

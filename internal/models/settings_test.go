@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/open-uem/ent/enttest"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -96,8 +96,8 @@ func (suite *SettingsTestSuite) TestGetDefaultUpdateChannel() {
 	assert.Equal(suite.T(), "stable", defaultUpdateChannel, "default update channel should be stable")
 }
 
-func (suite *SettingsTestSuite) TestUpdateOpenUEMChannel() {
-	err := suite.model.UpdateOpenUEMChannel(suite.settingsId, "devel")
+func (suite *SettingsTestSuite) TestUpdatescnorionplusChannel() {
+	err := suite.model.UpdatescnorionplusChannel(suite.settingsId, "devel")
 	assert.NoError(suite.T(), err, "should update channel setting")
 
 	setting, err := suite.model.GetDefaultUpdateChannel()

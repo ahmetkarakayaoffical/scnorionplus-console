@@ -4,9 +4,9 @@ import (
 	"context"
 	"strconv"
 
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/settings"
-	"github.com/open-uem/ent/tenant"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/settings"
+	"github.com/ahmetkarakayaoffical/ent/tenant"
 )
 
 type GeneralSettings struct {
@@ -123,7 +123,7 @@ func (m *Model) UpdateSessionLifetime(settingsId, sessionLifetime int) error {
 
 func (m *Model) GetDefaultAgentFrequency(tenantID string) (int, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldAgentReportFrequenceInMinutes).Only(context.Background())
@@ -166,7 +166,7 @@ func (m *Model) UpdateRequestVNCPIN(settingsId int, requestPIN bool) error {
 
 func (m *Model) GetDefaultRequestVNCPIN(tenantID string) (bool, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldRequestVncPin).Only(context.Background())
@@ -188,13 +188,13 @@ func (m *Model) GetDefaultRequestVNCPIN(tenantID string) (bool, error) {
 	return s.RequestVncPin, nil
 }
 
-func (m *Model) UpdateOpenUEMChannel(settingsId int, updateChannel string) error {
+func (m *Model) UpdatescnorionplusChannel(settingsId int, updateChannel string) error {
 	return m.Client.Settings.UpdateOneID(settingsId).SetUpdateChannel(updateChannel).Exec(context.Background())
 }
 
 func (m *Model) GetDefaultWingetFrequency(tenantID string) (int, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldProfilesApplicationFrequenceInMinutes).Only(context.Background())
@@ -222,7 +222,7 @@ func (m *Model) UpdateWingetFrequency(settingsId, frequency int) error {
 
 func (m *Model) GetDefaultSFTPDisabled(tenantID string) (bool, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldDisableSftp).Only(context.Background())
@@ -250,7 +250,7 @@ func (m *Model) UpdateSFTPDisabled(settingsId int, disableSFTP bool) error {
 
 func (m *Model) GetDefaultRemoteAssistanceDisabled(tenantID string) (bool, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldDisableRemoteAssistance).Only(context.Background())
@@ -278,7 +278,7 @@ func (m *Model) UpdateRemoteAssistanceDisabled(settingsId int, disableRemoteAssi
 
 func (m *Model) GetDefaultDetectRemoteAgents(tenantID string) (bool, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldDetectRemoteAgents).Only(context.Background())
@@ -306,7 +306,7 @@ func (m *Model) UpdateDetectRemoteAgents(settingsId int, detectRemoteAgents bool
 
 func (m *Model) GetDefaultAutoAdmitAgents(tenantID string) (bool, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldAutoAdmitAgents).Only(context.Background())
@@ -332,9 +332,9 @@ func (m *Model) UpdateAutoAdmitAgents(settingsId int, autoAdmitAgents bool) erro
 	return m.Client.Settings.UpdateOneID(settingsId).SetAutoAdmitAgents(autoAdmitAgents).Exec(context.Background())
 }
 
-func (m *Model) GetGeneralSettings(tenantID string) (*openuem_ent.Settings, error) {
-	var s *openuem_ent.Settings
-	var query *openuem_ent.SettingsQuery
+func (m *Model) GetGeneralSettings(tenantID string) (*scnorionplus_ent.Settings, error) {
+	var s *scnorionplus_ent.Settings
+	var query *scnorionplus_ent.SettingsQuery
 
 	if tenantID == "-1" {
 		query = m.Client.Settings.Query().WithTag().Select(
@@ -382,7 +382,7 @@ func (m *Model) GetGeneralSettings(tenantID string) (*openuem_ent.Settings, erro
 
 	s, err := query.Only(context.Background())
 	if err != nil {
-		if !openuem_ent.IsNotFound(err) {
+		if !scnorionplus_ent.IsNotFound(err) {
 			return nil, err
 		} else {
 			if tenantID == "-1" {
@@ -433,7 +433,7 @@ func (m *Model) UpdateUseWinget(settingsId int, useWinGet bool) error {
 
 func (m *Model) GetDefaultUseWinget(tenantID string) (bool, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldUseWinget).Only(context.Background())
@@ -461,7 +461,7 @@ func (m *Model) UpdateUseFlatpak(settingsId int, useFlatpak bool) error {
 
 func (m *Model) GetDefaultUseFlatpak(tenantID string) (bool, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldUseFlatpak).Only(context.Background())
@@ -489,7 +489,7 @@ func (m *Model) UpdateUseBrew(settingsId int, useBrew bool) error {
 
 func (m *Model) GetDefaultUseBrew(tenantID string) (bool, error) {
 	var err error
-	var s *openuem_ent.Settings
+	var s *scnorionplus_ent.Settings
 
 	if tenantID == "-1" {
 		s, err = m.Client.Settings.Query().Where(settings.Not(settings.HasTenant())).Select(settings.FieldUseBrew).Only(context.Background())

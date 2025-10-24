@@ -3,9 +3,9 @@ package handlers
 import (
 	"strconv"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/admin_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/openuem-console/internal/views/admin_views"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 )
 
 func (h *Handler) TagManager(c echo.Context) error {

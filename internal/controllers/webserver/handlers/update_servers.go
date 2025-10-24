@@ -11,14 +11,14 @@ import (
 
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/release"
-	"github.com/open-uem/ent/server"
-	openuem_nats "github.com/open-uem/nats"
-	model "github.com/open-uem/openuem-console/internal/models/servers"
-	"github.com/open-uem/openuem-console/internal/views/admin_views"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/release"
+	"github.com/ahmetkarakayaoffical/ent/server"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	model "github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models/servers"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/admin_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 )
 
 func (h *Handler) UpdateServers(c echo.Context) error {
@@ -67,7 +67,7 @@ func (h *Handler) UpdateServers(c echo.Context) error {
 				break
 			}
 
-			updateRequest := openuem_nats.OpenUEMUpdateRequest{}
+			updateRequest := scnorionplus_nats.scnorionplusUpdateRequest{}
 			updateRequest.DownloadFrom = releaseToBeApplied.FileURL
 			updateRequest.DownloadHash = releaseToBeApplied.Checksum
 			updateRequest.Version = releaseToBeApplied.Version
@@ -164,7 +164,7 @@ func (h *Handler) DeleteServerConfirm(c echo.Context) error {
 	return RenderConfirm(c, partials.ConfirmDelete(c, i18n.T(c.Request().Context(), "admin.update.servers.confirm_delete"), "/admin/update-servers", fmt.Sprintf("/admin/update-servers/%s", server)))
 }
 
-func (h *Handler) ShowUpdateServersList(c echo.Context, r *openuem_ent.Release, successMessage, errorMessage string) error {
+func (h *Handler) ShowUpdateServersList(c echo.Context, r *scnorionplus_ent.Release, successMessage, errorMessage string) error {
 	var err error
 
 	commonInfo, err := h.GetCommonInfo(c)

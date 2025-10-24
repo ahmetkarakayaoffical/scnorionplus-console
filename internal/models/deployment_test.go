@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/enttest"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -134,7 +134,7 @@ func (suite *DeploymentTestSuite) TestCountAllDeployments() {
 }
 
 func (suite *DeploymentTestSuite) TestSaveDeployInfo() {
-	err := suite.model.SaveDeployInfo(&openuem_nats.DeployAction{
+	err := suite.model.SaveDeployInfo(&scnorionplus_nats.DeployAction{
 		AgentId:        "agent1",
 		Action:         "install",
 		PackageId:      "package7",
@@ -149,7 +149,7 @@ func (suite *DeploymentTestSuite) TestSaveDeployInfo() {
 	assert.NoError(suite.T(), err, "should get deployments for agent")
 	assert.Equal(suite.T(), "package7", items[7].PackageID, "should get package7")
 
-	err = suite.model.SaveDeployInfo(&openuem_nats.DeployAction{
+	err = suite.model.SaveDeployInfo(&scnorionplus_nats.DeployAction{
 		AgentId:   "agent1",
 		Action:    "update",
 		PackageId: "package7",
@@ -160,7 +160,7 @@ func (suite *DeploymentTestSuite) TestSaveDeployInfo() {
 	assert.NoError(suite.T(), err, "should get deployments for agent")
 	assert.Equal(suite.T(), true, items[7].Updated.IsZero(), "update time should be zero")
 
-	err = suite.model.SaveDeployInfo(&openuem_nats.DeployAction{
+	err = suite.model.SaveDeployInfo(&scnorionplus_nats.DeployAction{
 		AgentId:   "agent1",
 		Action:    "uninstall",
 		PackageId: "package3",

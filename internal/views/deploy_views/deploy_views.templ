@@ -4,21 +4,21 @@ import (
 	"fmt"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/ent"
-	"github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/layout"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/layout"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"strconv"
 	"strings"
 )
 
 templ Deploy(c echo.Context, install bool, successMessage string, commonInfo *partials.CommonInfo) {
 	if install {
-		<title>OpenUEM | { i18n.T(ctx, "Deploy") } | { i18n.T(ctx, "Install") } </title>
+		<title>scnorionplus | { i18n.T(ctx, "Deploy") } | { i18n.T(ctx, "Install") } </title>
 		@partials.Header(c, []partials.Breadcrumb{{Title: i18n.T(ctx, "Deploy"), Url: string(templ.URL(partials.GetNavigationUrl(commonInfo, "/deploy")))}, {Title: "Install", Url: string(templ.URL(partials.GetNavigationUrl(commonInfo, "/deploy/install")))}}, commonInfo)
 	} else {
-		<title>OpenUEM | { i18n.T(ctx, "Deploy") } | { i18n.T(ctx, "Uninstall") } </title>
+		<title>scnorionplus | { i18n.T(ctx, "Deploy") } | { i18n.T(ctx, "Uninstall") } </title>
 		@partials.Header(c, []partials.Breadcrumb{{Title: i18n.T(ctx, "Deploy"), Url: string(templ.URL(partials.GetNavigationUrl(commonInfo, "/deploy")))}, {Title: "Uninstall", Url: string(templ.URL(partials.GetNavigationUrl(commonInfo, "/deploy/uninstall")))}}, commonInfo)
 	}
 	<main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -221,10 +221,10 @@ templ SearchPacketResult(install bool, packages []nats.SoftwarePackage, c echo.C
 
 templ SelectPackageDeployment(c echo.Context, p partials.PaginationAndSort, f filters.AgentFilter, packageId, packageName string, agents []*ent.Agent, install bool, refresh int, commonInfo *partials.CommonInfo) {
 	if install {
-		<title>OpenUEM | { i18n.T(ctx, "Deploy") } | { i18n.T(ctx, "Install") } </title>
+		<title>scnorionplus | { i18n.T(ctx, "Deploy") } | { i18n.T(ctx, "Install") } </title>
 		@partials.Header(c, []partials.Breadcrumb{{Title: i18n.T(ctx, "Deploy"), Url: string(templ.URL(partials.GetNavigationUrl(commonInfo, "/deploy")))}, {Title: "Install", Url: string(templ.URL(partials.GetNavigationUrl(commonInfo, "/deploy/install")))}, {Title: packageName, Url: ""}}, commonInfo)
 	} else {
-		<title>OpenUEM | { i18n.T(ctx, "Deploy") } | { i18n.T(ctx, "Uninstall") } </title>
+		<title>scnorionplus | { i18n.T(ctx, "Deploy") } | { i18n.T(ctx, "Uninstall") } </title>
 		@partials.Header(c, []partials.Breadcrumb{{Title: i18n.T(ctx, "Deploy"), Url: string(templ.URL(partials.GetNavigationUrl(commonInfo, "/deploy")))}, {Title: "Uninstall", Url: string(templ.URL(partials.GetNavigationUrl(commonInfo, "/deploy/uninstall")))}, {Title: packageName, Url: ""}}, commonInfo)
 	}
 	<main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">

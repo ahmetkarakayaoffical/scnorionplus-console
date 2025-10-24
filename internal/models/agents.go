@@ -6,18 +6,18 @@ import (
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/antivirus"
-	"github.com/open-uem/ent/predicate"
-	"github.com/open-uem/ent/release"
-	"github.com/open-uem/ent/site"
-	"github.com/open-uem/ent/systemupdate"
-	"github.com/open-uem/ent/tag"
-	"github.com/open-uem/ent/tenant"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/antivirus"
+	"github.com/ahmetkarakayaoffical/ent/predicate"
+	"github.com/ahmetkarakayaoffical/ent/release"
+	"github.com/ahmetkarakayaoffical/ent/site"
+	"github.com/ahmetkarakayaoffical/ent/systemupdate"
+	"github.com/ahmetkarakayaoffical/ent/tag"
+	"github.com/ahmetkarakayaoffical/ent/tenant"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 )
 
 type Agent struct {
@@ -563,9 +563,9 @@ func (m *Model) CountNoAutoupdateAgents(c *partials.CommonInfo) (int, error) {
 	}
 
 	if siteID == -1 {
-		return m.Client.Agent.Query().Where(agent.HasSystemupdateWith(systemupdate.Not(systemupdate.SystemUpdateStatusContains(openuem_nats.NOTIFY_SCHEDULED_INSTALLATION))), agent.AgentStatusNEQ(agent.AgentStatusWaitingForAdmission)).Where(agent.HasSiteWith(site.HasTenantWith(tenant.ID(tenantID)))).Count(context.Background())
+		return m.Client.Agent.Query().Where(agent.HasSystemupdateWith(systemupdate.Not(systemupdate.SystemUpdateStatusContains(scnorionplus_nats.NOTIFY_SCHEDULED_INSTALLATION))), agent.AgentStatusNEQ(agent.AgentStatusWaitingForAdmission)).Where(agent.HasSiteWith(site.HasTenantWith(tenant.ID(tenantID)))).Count(context.Background())
 	} else {
-		return m.Client.Agent.Query().Where(agent.HasSystemupdateWith(systemupdate.Not(systemupdate.SystemUpdateStatusContains(openuem_nats.NOTIFY_SCHEDULED_INSTALLATION))), agent.AgentStatusNEQ(agent.AgentStatusWaitingForAdmission)).Where(agent.HasSiteWith(site.ID(siteID), site.HasTenantWith(tenant.ID(tenantID)))).Count(context.Background())
+		return m.Client.Agent.Query().Where(agent.HasSystemupdateWith(systemupdate.Not(systemupdate.SystemUpdateStatusContains(scnorionplus_nats.NOTIFY_SCHEDULED_INSTALLATION))), agent.AgentStatusNEQ(agent.AgentStatusWaitingForAdmission)).Where(agent.HasSiteWith(site.ID(siteID), site.HasTenantWith(tenant.ID(tenantID)))).Count(context.Background())
 	}
 }
 
@@ -805,7 +805,7 @@ func (m *Model) GetAllUpdateAgents(f filters.UpdateAgentsFilter, c *partials.Com
 	return agents, nil
 }
 
-func (m *Model) SaveAgentSettings(agentID string, settings openuem_nats.AgentSetting, c *partials.CommonInfo) (*ent.Agent, error) {
+func (m *Model) SaveAgentSettings(agentID string, settings scnorionplus_nats.AgentSetting, c *partials.CommonInfo) (*ent.Agent, error) {
 	siteID, err := strconv.Atoi(c.SiteID)
 	if err != nil {
 		return nil, err

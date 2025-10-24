@@ -8,13 +8,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/ahmetkarakayaoffical/ent/task"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/tasks_views"
+	"github.com/ahmetkarakayaoffical/wingetcfg/wingetcfg"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/ent/task"
-	"github.com/open-uem/openuem-console/internal/models"
-	"github.com/open-uem/openuem-console/internal/views/partials"
-	"github.com/open-uem/openuem-console/internal/views/tasks_views"
-	"github.com/open-uem/wingetcfg/wingetcfg"
 )
 
 func (h *Handler) NewTask(c echo.Context) error {

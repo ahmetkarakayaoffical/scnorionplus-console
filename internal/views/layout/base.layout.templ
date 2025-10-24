@@ -1,7 +1,7 @@
 package layout
 
 import (
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"strings"
 )
 
@@ -13,11 +13,11 @@ templ Base(section string, commonInfo *partials.CommonInfo) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<meta
 				name="description"
-				content="OpenUEM: An Open Source Unified Endpoint Manager"
+				content="scnorionplus:  Unified Endpoint Manager"
 			/>
 			<meta name="google" content="notranslate"/>
 			<meta name="htmx-config" content='{"selfRequestsOnly": false}'/>
-			<title>OpenUEM | { strings.Title(section) }</title>
+			<title>scnorionplus | { strings.Title(section) }</title>
 			<link rel="stylesheet" href="/assets/css/remixicon.min.css" type="text/css"/>
 			<link rel="stylesheet" href="/assets/css/simple-icons.min.css" type="text/css"/>
 			<link rel="stylesheet" href="/assets/css/markdown.css" type="text/css"/>
@@ -28,7 +28,7 @@ templ Base(section string, commonInfo *partials.CommonInfo) {
 			<script src="/assets/js/icon.iife.js" type="module"></script>
 			<script src="/assets/js/htmx.min.js"></script>
 			<script src="/assets/js/echarts.min.js"></script>
-			<script src="/assets/js/openuem.js" type="module"></script>
+			<script src="/assets/js/scnorionplus.js" type="module"></script>
 			<script>
 				const htmlElement = document.documentElement;
 
@@ -43,7 +43,7 @@ templ Base(section string, commonInfo *partials.CommonInfo) {
 				}
 
 				htmlElement.classList.add(
-					localStorage.getItem("theme") || "uk-theme-openuem",
+					localStorage.getItem("theme") || "uk-theme-scnorionplus",
 				);
 			</script>
 		</head>

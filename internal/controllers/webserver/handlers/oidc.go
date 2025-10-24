@@ -18,13 +18,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/auth"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/coreos/go-oidc/v3/oidc"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/ent"
-	"github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/auth"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 	"golang.org/x/oauth2"
 )
 
@@ -201,14 +201,14 @@ func (h *Handler) OIDCCallback(c echo.Context) error {
 			}
 
 			if !slices.Contains(data.Roles, settings.OIDCRole) {
-				return echo.NewHTTPError(http.StatusUnauthorized, "user has no permission to log in to OpenUEM")
+				return echo.NewHTTPError(http.StatusUnauthorized, "user has no permission to log in to scnorionplus")
 			}
 		}
 	} else {
 
 		if settings.OIDCRole != "" {
 			if !slices.Contains(u.Groups, settings.OIDCRole) {
-				return echo.NewHTTPError(http.StatusUnauthorized, "user has no permission to log in to OpenUEM")
+				return echo.NewHTTPError(http.StatusUnauthorized, "user has no permission to log in to scnorionplus")
 			}
 		}
 	}

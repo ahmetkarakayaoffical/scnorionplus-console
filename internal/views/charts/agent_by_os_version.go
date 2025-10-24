@@ -4,11 +4,11 @@ import (
 	"context"
 	"strconv"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
 	"github.com/go-echarts/go-echarts/v2/render"
 	"github.com/invopop/ctxi18n/i18n"
-	"github.com/open-uem/openuem-console/internal/models"
 )
 
 func AgentsByOsVersion(ctx context.Context, agents []models.Agent, countAllAgents int) render.ChartSnippet {

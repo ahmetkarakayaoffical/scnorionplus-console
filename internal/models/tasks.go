@@ -5,14 +5,14 @@ import (
 	"errors"
 	"strconv"
 
+	ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/profile"
+	"github.com/ahmetkarakayaoffical/ent/site"
+	"github.com/ahmetkarakayaoffical/ent/task"
+	"github.com/ahmetkarakayaoffical/ent/tenant"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/profile"
-	"github.com/open-uem/ent/site"
-	"github.com/open-uem/ent/task"
-	"github.com/open-uem/ent/tenant"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 )
 
 type TaskConfig struct {

@@ -9,16 +9,17 @@ import (
 	"strings"
 	"syscall"
 
+	"https://github.com/ahmetkarakayaoffical/scnorionplus-console/internal/common"
+
+	"github.com/ahmetkarakayaoffical/utils"
 	"github.com/go-co-op/gocron/v2"
-	"github.com/open-uem/openuem-console/internal/common"
-	"github.com/open-uem/utils"
 	"github.com/urfave/cli/v2"
 )
 
 func StartConsole() *cli.Command {
 	return &cli.Command{
 		Name:   "start",
-		Usage:  "Start the OpenUEM console",
+		Usage:  "Start the scnorionplus console",
 		Action: startConsole,
 		Flags:  StartConsoleFlags(),
 	}
@@ -28,7 +29,7 @@ func startConsole(cCtx *cli.Context) error {
 	worker := common.NewWorker("")
 
 	if err := worker.GenerateConsoleConfigFromCLI(cCtx); err != nil {
-		log.Fatalf("[FATAL]: could not generate config for OpenUEM Console: %v", err)
+		log.Fatalf("[FATAL]: could not generate config for scnorionplus Console: %v", err)
 	}
 
 	// Get working directory

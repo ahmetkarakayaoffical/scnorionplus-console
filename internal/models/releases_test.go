@@ -6,12 +6,12 @@ import (
 	"testing"
 	"time"
 
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/enttest"
-	"github.com/open-uem/ent/release"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
+	"github.com/ahmetkarakayaoffical/ent/release"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -103,7 +103,7 @@ func (suite *ReleasesTestSuite) TestGetAgentsReleaseByType() {
 	assert.NoError(suite.T(), err, "should get release agent windows 0.1.5")
 
 	_, err = suite.model.GetAgentsReleaseByType(release.ReleaseTypeAgent, "stable", "linux", "amd64", "0.1.1")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should get error trying to get agent linux 0.1.1")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should get error trying to get agent linux 0.1.1")
 }
 
 func (suite *ReleasesTestSuite) TestGetServersReleaseByType() {
@@ -114,7 +114,7 @@ func (suite *ReleasesTestSuite) TestGetServersReleaseByType() {
 	assert.NoError(suite.T(), err, "should get release server linux 0.1.4")
 
 	_, err = suite.model.GetServersReleaseByType(release.ReleaseTypeServer, "stable", "linux", "amd64", "0.1.4")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should get error trying to get server linux 0.1.6")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should get error trying to get server linux 0.1.6")
 }
 
 func (suite *ReleasesTestSuite) TestGetHigherAgentReleaseInstalled() {
@@ -136,13 +136,13 @@ func (suite *ReleasesTestSuite) TestCountUpgradableAgents() {
 }
 
 func (suite *ReleasesTestSuite) TestSaveNewReleaseAvailable() {
-	err := suite.model.SaveNewReleaseAvailable(release.ReleaseTypeAgent, openuem_nats.OpenUEMRelease{
+	err := suite.model.SaveNewReleaseAvailable(release.ReleaseTypeAgent, scnorionplus_nats.scnorionplusRelease{
 		Version:         "0.2.0",
 		Channel:         "stable",
 		Summary:         "summary",
 		ReleaseNotesURL: "url",
 		ReleaseDate:     time.Now(),
-		Files:           []openuem_nats.FileInfo{{Arch: "amd64", Os: "windows", FileURL: "url", Checksum: "checksum"}},
+		Files:           []scnorionplus_nats.FileInfo{{Arch: "amd64", Os: "windows", FileURL: "url", Checksum: "checksum"}},
 		IsCritical:      false,
 	})
 	assert.NoError(suite.T(), err, "should save new release")

@@ -5,8 +5,8 @@ import (
 	"github.com/go-echarts/go-echarts/v2/render"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/openuem-console/internal/views/layout"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/layout"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"strconv"
 )
 
@@ -33,7 +33,7 @@ type DashboardData struct {
 	NWaitingForAdmission       int
 	NApps                      int
 	NDeployments               int
-	NOpenUEMUsers              int
+	NscnorionplusUsers              int
 	NSessions                  int
 	NUsernames                 int
 	RefreshTime                int
@@ -43,7 +43,7 @@ type DashboardData struct {
 	AgentWorkerStatus          string
 	NotificationWorkerStatus   string
 	CertManagerWorkerStatus    string
-	OpenUEMUpdaterAPIStatus    string
+	scnorionplusUpdaterAPIStatus    string
 	NCertificatesAboutToExpire int
 }
 
@@ -285,7 +285,7 @@ templ Dashboard(c echo.Context, data DashboardData, commonInfo *partials.CommonI
 							</td>
 						</tr>
 						<tr>
-							<th class="!align-middle">{ i18n.T(ctx, "dashboard.num_openuem_users") }</th>
+							<th class="!align-middle">{ i18n.T(ctx, "dashboard.num_scnorionplus_users") }</th>
 							<td class="!align-middle text-center">
 								<a
 									href="/admin/users"
@@ -295,7 +295,7 @@ templ Dashboard(c echo.Context, data DashboardData, commonInfo *partials.CommonI
 									hx-push-url="true"
 									class="uk-text-bold underline"
 								>
-									{ strconv.Itoa(data.NOpenUEMUsers) }
+									{ strconv.Itoa(data.NscnorionplusUsers) }
 								</a>
 							</td>
 						</tr>
@@ -325,9 +325,9 @@ templ Dashboard(c echo.Context, data DashboardData, commonInfo *partials.CommonI
 							</td>
 						</tr>
 						<tr>
-							<th class="!align-middle">{ i18n.T(ctx, "dashboard.openuem_updater_api_status") }</th>
+							<th class="!align-middle">{ i18n.T(ctx, "dashboard.scnorionplus_updater_api_status") }</th>
 							<td class="!align-middle text-center">
-								@partials.Status(data.OpenUEMUpdaterAPIStatus)
+								@partials.Status(data.scnorionplusUpdaterAPIStatus)
 							</td>
 						</tr>
 						<tr>

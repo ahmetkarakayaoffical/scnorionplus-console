@@ -8,14 +8,14 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console//internal/common"
 	"github.com/go-co-op/gocron/v2"
-	"github.com/open-uem/openuem-console/internal/common"
 )
 
 func main() {
 	var err error
 
-	w := common.NewWorker("openuem-console-service")
+	w := common.NewWorker("scnorionplus-console-service")
 
 	// Start Task Scheduler
 	w.TaskScheduler, err = gocron.NewScheduler()
@@ -27,9 +27,9 @@ func main() {
 	log.Println("[INFO]: task scheduler has been started")
 
 	if err := w.GenerateConsoleConfig(); err != nil {
-		log.Printf("[ERROR]: could not generate config for OpenUEM console: %v", err)
+		log.Printf("[ERROR]: could not generate config for scnorionplus console: %v", err)
 		if err := w.StartGenerateConsoleConfigJob(); err != nil {
-			log.Fatalf("[FATAL]: could not start job to generate config for OpenUEM console: %v", err)
+			log.Fatalf("[FATAL]: could not start job to generate config for scnorionplus console: %v", err)
 		}
 	}
 

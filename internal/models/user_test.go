@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/enttest"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -328,7 +328,7 @@ func (suite *UserTestSuite) TestAddImporteOIDCdUser() {
 
 func (suite *UserTestSuite) TestUpdateUser() {
 	err := suite.model.UpdateUser("user9", "User7", "user7@example.com", "", "ES")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "cannot update non existing user")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "cannot update non existing user")
 
 	err = suite.model.UpdateUser("user2", "User7", "user7@example.com", "", "ES")
 	assert.NoError(suite.T(), err, "should update existing user")
@@ -358,7 +358,7 @@ func (suite *UserTestSuite) TestRegisterUser() {
 
 func (suite *UserTestSuite) TestGetUserById() {
 	_, err := suite.model.GetUserById("user9")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "cannot find non existing user")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "cannot find non existing user")
 
 	user, err := suite.model.GetUserById("user3")
 	assert.NoError(suite.T(), err, "should get recently created user")
@@ -376,7 +376,7 @@ func (suite *UserTestSuite) TestConfirmEmail() {
 	assert.Equal(suite.T(), "user4", user.ID, "user should have user4 id")
 	assert.Equal(suite.T(), "User 4", user.Name, "user should have User4 name")
 	assert.Equal(suite.T(), true, user.EmailVerified, "user should have email verified")
-	assert.Equal(suite.T(), openuem_nats.REGISTER_IN_REVIEW, user.Register)
+	assert.Equal(suite.T(), scnorionplus_nats.REGISTER_IN_REVIEW, user.Register)
 }
 
 func (suite *UserTestSuite) TestUserSetRevokedCertificate() {
@@ -387,7 +387,7 @@ func (suite *UserTestSuite) TestUserSetRevokedCertificate() {
 	assert.NoError(suite.T(), err, "should get confirmed email user")
 	assert.Equal(suite.T(), "user4", user.ID, "user should have user4 id")
 	assert.Equal(suite.T(), "User 4", user.Name, "user should have User4 name")
-	assert.Equal(suite.T(), openuem_nats.REGISTER_REVOKED, user.Register)
+	assert.Equal(suite.T(), scnorionplus_nats.REGISTER_REVOKED, user.Register)
 }
 
 func (suite *UserTestSuite) TestConfirmLogIn() {
@@ -399,7 +399,7 @@ func (suite *UserTestSuite) TestConfirmLogIn() {
 	assert.Equal(suite.T(), "user5", user.ID, "user should have user5 id")
 	assert.Equal(suite.T(), "User 5", user.Name, "user should have User 5 name")
 	assert.Equal(suite.T(), "", user.CertClearPassword, "user should have empty cert clear password")
-	assert.Equal(suite.T(), openuem_nats.REGISTER_COMPLETE, user.Register)
+	assert.Equal(suite.T(), scnorionplus_nats.REGISTER_COMPLETE, user.Register)
 }
 
 func (suite *UserTestSuite) TestDeleteUser() {

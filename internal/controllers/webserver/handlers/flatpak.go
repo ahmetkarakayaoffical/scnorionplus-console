@@ -1,10 +1,10 @@
 package handlers
 
 import (
+	models "github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models/winget"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	models "github.com/open-uem/openuem-console/internal/models/winget"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 )
 
 func (h *Handler) SearchFlatpakPackages(c echo.Context) error {

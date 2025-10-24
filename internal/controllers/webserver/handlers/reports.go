@@ -10,6 +10,13 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/agents_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/reports_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/utils"
 	"github.com/google/uuid"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/johnfercher/maroto/v2"
@@ -25,13 +32,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/ent"
-	"github.com/open-uem/openuem-console/internal/models"
-	"github.com/open-uem/openuem-console/internal/views/agents_views"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
-	"github.com/open-uem/openuem-console/internal/views/reports_views"
-	"github.com/open-uem/utils"
 	"github.com/xuri/excelize/v2"
 )
 
@@ -999,7 +999,7 @@ func getPageHeader(title string) core.Row {
 	}
 
 	return row.New(10).Add(
-		image.NewFromFileCol(3, filepath.Join(cwd, "assets", "img", "openuem.png"), props.Rect{
+		image.NewFromFileCol(3, filepath.Join(cwd, "assets", "img", "scnorionplus.png"), props.Rect{
 			Percent: 75,
 		}),
 		text.NewCol(6, title, props.Text{

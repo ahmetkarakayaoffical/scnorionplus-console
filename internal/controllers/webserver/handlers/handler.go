@@ -6,12 +6,12 @@ import (
 	"strings"
 	"time"
 
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/sessions"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
 	"github.com/go-co-op/gocron/v2"
 	"github.com/nats-io/nats.go"
 	"github.com/nats-io/nats.go/jetstream"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/controllers/sessions"
-	"github.com/open-uem/openuem-console/internal/models"
 )
 
 type Handler struct {
@@ -44,7 +44,7 @@ type Handler struct {
 	Country              string
 	ReverseProxyAuthPort string
 	ReverseProxyServer   string
-	LatestServerRelease  openuem_nats.OpenUEMRelease
+	LatestServerRelease  scnorionplus_nats.scnorionplusRelease
 	Replicas             int
 	ServerReleasesFolder string
 	WingetFolder         string
@@ -112,7 +112,7 @@ func (h *Handler) StartNATSConnectJob() error {
 	var err error
 	var ctx context.Context
 
-	h.NATSConnection, err = openuem_nats.ConnectWithNATS(h.NATSServers, h.CertPath, h.KeyPath, h.CACertPath)
+	h.NATSConnection, err = scnorionplus_nats.ConnectWithNATS(h.NATSServers, h.CertPath, h.KeyPath, h.CACertPath)
 	if err == nil {
 		h.JetStream, err = jetstream.New(h.NATSConnection)
 		if err == nil {
@@ -139,7 +139,7 @@ func (h *Handler) StartNATSConnectJob() error {
 				} else {
 					serversExists, err := h.Model.ServersExists()
 					if err != nil {
-						log.Println("[INFO]: could not check if OpenUEM server exists")
+						log.Println("[INFO]: could not check if scnorionplus server exists")
 					} else {
 						if serversExists {
 							log.Printf("[ERROR]: Server Stream could not be instantiated, reason: %v", err)
@@ -164,7 +164,7 @@ func (h *Handler) StartNATSConnectJob() error {
 		gocron.NewTask(
 			func() {
 				if h.NATSConnection == nil {
-					h.NATSConnection, err = openuem_nats.ConnectWithNATS(h.NATSServers, h.CertPath, h.KeyPath, h.CACertPath)
+					h.NATSConnection, err = scnorionplus_nats.ConnectWithNATS(h.NATSServers, h.CertPath, h.KeyPath, h.CACertPath)
 					if err != nil {
 						log.Printf("[ERROR]: could not connect to NATS %v", err)
 						return
@@ -207,7 +207,7 @@ func (h *Handler) StartNATSConnectJob() error {
 				if err != nil {
 					serversExists, err := h.Model.ServersExists()
 					if err != nil {
-						log.Println("[INFO]: could not check if OpenUEM server exists")
+						log.Println("[INFO]: could not check if scnorionplus server exists")
 					} else {
 						if serversExists {
 							log.Printf("[ERROR]: Server Stream could not be created or updated, reason: %v", err)

@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/enttest"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )

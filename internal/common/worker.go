@@ -4,17 +4,18 @@ import (
 	"log"
 	"time"
 
+	"https://github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/authserver"
+	"https://github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/sessions"
+	"https://github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/webserver"
+	"https://github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
+	"https://github.com/ahmetkarakayaoffical/utils"
+
 	"github.com/go-co-op/gocron/v2"
-	"github.com/open-uem/openuem-console/internal/controllers/authserver"
-	"github.com/open-uem/openuem-console/internal/controllers/sessions"
-	"github.com/open-uem/openuem-console/internal/controllers/webserver"
-	"github.com/open-uem/openuem-console/internal/models"
-	"github.com/open-uem/utils"
 )
 
 type Worker struct {
 	Model                             *models.Model
-	Logger                            *utils.OpenUEMLogger
+	Logger                            *utils.scnorionplusLogger
 	DBConnectJob                      gocron.Job
 	ConfigJob                         gocron.Job
 	TaskScheduler                     gocron.Scheduler

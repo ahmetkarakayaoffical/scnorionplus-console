@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/enttest"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
+	scnorionplus_ent "github.com/open-uem/ent"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -320,7 +320,7 @@ func (suite *ComputersTestSuite) TestGetAgentComputerInfo() {
 
 	_, err = suite.model.GetAgentComputerInfo("agent7", suite.commonInfo)
 	assert.Error(suite.T(), err, "should not found agent7")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *ComputersTestSuite) TestGetAgentOSInfo() {
@@ -333,7 +333,7 @@ func (suite *ComputersTestSuite) TestGetAgentOSInfo() {
 
 	_, err = suite.model.GetAgentOSInfo("agent7", suite.commonInfo)
 	assert.Error(suite.T(), err, "should not found agent7")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *ComputersTestSuite) TestGetAgentNetworkAdaptersInfo() {
@@ -346,7 +346,7 @@ func (suite *ComputersTestSuite) TestGetAgentNetworkAdaptersInfo() {
 
 	_, err = suite.model.GetAgentNetworkAdaptersInfo("agent7", suite.commonInfo)
 	assert.Error(suite.T(), err, "should not found agent7")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *ComputersTestSuite) TestGetAgentLogicalDisksInfo() {
@@ -359,7 +359,7 @@ func (suite *ComputersTestSuite) TestGetAgentLogicalDisksInfo() {
 
 	_, err = suite.model.GetAgentLogicalDisksInfo("agent7", suite.commonInfo)
 	assert.Error(suite.T(), err, "should not found agent7")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *ComputersTestSuite) TestGetAgentPhysicalDisksInfo() {
@@ -372,7 +372,7 @@ func (suite *ComputersTestSuite) TestGetAgentPhysicalDisksInfo() {
 
 	_, err = suite.model.GetAgentPhysicalDisksInfo("agent7", suite.commonInfo)
 	assert.Error(suite.T(), err, "should not found agent7")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *ComputersTestSuite) TestGetAgentSharesInfo() {
@@ -385,7 +385,7 @@ func (suite *ComputersTestSuite) TestGetAgentSharesInfo() {
 
 	_, err = suite.model.GetAgentSharesInfo("agent7", suite.commonInfo)
 	assert.Error(suite.T(), err, "should not found agent7")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *ComputersTestSuite) TestGetAgentMonitorsInfo() {
@@ -398,7 +398,7 @@ func (suite *ComputersTestSuite) TestGetAgentMonitorsInfo() {
 
 	_, err = suite.model.GetAgentMonitorsInfo("agent7", suite.commonInfo)
 	assert.Error(suite.T(), err, "should not found agent7")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "should raise not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "should raise not found error")
 }
 
 func (suite *ComputersTestSuite) TestSaveNotes() {

@@ -3,8 +3,9 @@ package commands
 import (
 	"log"
 
-	"github.com/open-uem/openuem-console/internal/models"
-	"github.com/open-uem/utils"
+	"https://github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
+	"https://github.com/ahmetkarakayaoffical/utils"
+
 	"github.com/urfave/cli/v2"
 )
 

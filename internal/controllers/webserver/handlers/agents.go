@@ -12,14 +12,14 @@ import (
 	"strings"
 	"time"
 
+	"github.com/ahmetkarakayaoffical/ent"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/agents_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/utils"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/ent"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/agents_views"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
-	"github.com/open-uem/utils"
 )
 
 func (h *Handler) ListAgents(c echo.Context, successMessage, errMessage string, comesFromDialog bool) error {
@@ -388,7 +388,7 @@ func (h *Handler) AgentsAdmit(c echo.Context) error {
 					domain = agent.Edges.Site[0].Domain
 				}
 
-				data, err := json.Marshal(openuem_nats.CertificateRequest{
+				data, err := json.Marshal(scnorionplus_nats.CertificateRequest{
 					AgentId:      agentId,
 					DNSName:      agent.Hostname + "." + domain,
 					Organization: h.OrgName,
@@ -637,7 +637,7 @@ func (h *Handler) AgentConfirmAdmission(c echo.Context, regenerate bool) error {
 		domain = agent.Edges.Site[0].Domain
 	}
 
-	data, err := json.Marshal(openuem_nats.CertificateRequest{
+	data, err := json.Marshal(scnorionplus_nats.CertificateRequest{
 		AgentId:      agentId,
 		DNSName:      agent.Hostname + "." + domain,
 		Organization: h.OrgName,
@@ -722,9 +722,9 @@ func (h *Handler) AgentLogs(c echo.Context) error {
 
 	logFile := ""
 	if a.Os == "windows" {
-		logFile = "C:\\Program Files\\OpenUEM Agent\\logs\\openuem-log.txt"
+		logFile = "C:\\Program Files\\scnorionplus Agent\\logs\\scnorionplus-log.txt"
 	} else {
-		logFile = "/var/log/openuem-agent/openuem-agent.log"
+		logFile = "/var/log/scnorionplus-agent/scnorionplus-agent.log"
 	}
 
 	// Get agents log using SFTP
@@ -736,9 +736,9 @@ func (h *Handler) AgentLogs(c echo.Context) error {
 	agentLog := parseLogFile(data, category)
 
 	if a.Os == "windows" {
-		logFile = "C:\\Program Files\\OpenUEM Agent\\logs\\openuem-agent-updater.txt"
+		logFile = "C:\\Program Files\\scnorionplus Agent\\logs\\scnorionplus-agent-updater.txt"
 	} else {
-		logFile = "/var/log/openuem-agent/openuem-updater.log"
+		logFile = "/var/log/scnorionplus-agent/scnorionplus-updater.log"
 	}
 
 	// Get updaters log using SFTP
@@ -803,8 +803,8 @@ func parseLogFile(data, category string) []agents_views.LogEntry {
 		if strings.Contains(line, ">>>>>>>") || strings.Contains(line, "<<<<<<<") {
 			continue
 		}
-		line = strings.TrimPrefix(line, "openuem-agent:")
-		line = strings.TrimPrefix(line, "openuem-updater:")
+		line = strings.TrimPrefix(line, "scnorionplus-agent:")
+		line = strings.TrimPrefix(line, "scnorionplus-updater:")
 		logEntry := agents_views.LogEntry{}
 		if !strings.Contains(line, "[") {
 			continue
@@ -864,7 +864,7 @@ func (h *Handler) AgentSettings(c echo.Context) error {
 	}
 
 	if c.Request().Method == "POST" {
-		s := openuem_nats.AgentSetting{}
+		s := scnorionplus_nats.AgentSetting{}
 
 		s.DebugMode = false
 		if c.FormValue("debug-mode") != "" {
@@ -923,7 +923,7 @@ func (h *Handler) AgentSettings(c echo.Context) error {
 		if err != nil {
 			errMessage := err.Error()
 			// Rollback
-			s := openuem_nats.AgentSetting{}
+			s := scnorionplus_nats.AgentSetting{}
 			s.DebugMode = currentAgent.DebugMode
 			s.RemoteAssistance = currentAgent.RemoteAssistance
 			s.SFTPService = currentAgent.SftpService

@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	openuem_ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/enttest"
-	"github.com/open-uem/ent/server"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
+	"github.com/ahmetkarakayaoffical/ent/server"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -234,7 +234,7 @@ func (suite *ServersTestSuite) TestGetServerById() {
 
 	_, err = suite.model.GetServerById(0)
 	assert.Error(suite.T(), err, "should get an error using a non existent id")
-	assert.Equal(suite.T(), true, openuem_ent.IsNotFound(err), "query should return a not found error")
+	assert.Equal(suite.T(), true, scnorionplus_ent.IsNotFound(err), "query should return a not found error")
 }
 
 func (suite *ServersTestSuite) TestDeleteServer() {

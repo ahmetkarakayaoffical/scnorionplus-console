@@ -4,10 +4,10 @@ import (
 	"context"
 	"strconv"
 
-	ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/tag"
-	"github.com/open-uem/ent/tenant"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/tag"
+	"github.com/ahmetkarakayaoffical/ent/tenant"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 )
 
 func (m *Model) GetAllTags(c *partials.CommonInfo) ([]*ent.Tag, error) {

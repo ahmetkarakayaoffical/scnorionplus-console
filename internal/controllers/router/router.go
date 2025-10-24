@@ -9,15 +9,15 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/router/middleware"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/sessions"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/locales"
+	"github.com/ahmetkarakayaoffical/utils"
 	session "github.com/canidam/echo-scs-session"
 	"github.com/invopop/ctxi18n"
 	"github.com/labstack/echo/v4"
 	mw "github.com/labstack/echo/v4/middleware"
-	"github.com/open-uem/openuem-console/internal/controllers/router/middleware"
-	"github.com/open-uem/openuem-console/internal/controllers/sessions"
-	"github.com/open-uem/openuem-console/internal/views"
-	"github.com/open-uem/openuem-console/internal/views/locales"
-	"github.com/open-uem/utils"
 )
 
 func New(s *sessions.SessionManager, server, port, maxUploadSize string) *echo.Echo {

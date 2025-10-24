@@ -5,13 +5,13 @@ import (
 	"strconv"
 	"time"
 
-	ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/deployment"
-	"github.com/open-uem/ent/site"
-	"github.com/open-uem/ent/tenant"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	ent "github.com/ahmetkarakayaoffical//ent"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/deployment"
+	"github.com/ahmetkarakayaoffical/ent/site"
+	"github.com/ahmetkarakayaoffical/ent/tenant"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 )
 
 func (m *Model) GetDeploymentsForAgent(agentId string, p partials.PaginationAndSort, c *partials.CommonInfo) ([]*ent.Deployment, error) {
@@ -147,7 +147,7 @@ func (m *Model) CountAllDeployments(c *partials.CommonInfo) (int, error) {
 	}
 }
 
-func (m *Model) SaveDeployInfo(data *openuem_nats.DeployAction, deploymentFailed bool, c *partials.CommonInfo) error {
+func (m *Model) SaveDeployInfo(data *scnorionplus_nats.DeployAction, deploymentFailed bool, c *partials.CommonInfo) error {
 	timeZero := time.Date(0001, 1, 1, 00, 00, 00, 00, time.UTC)
 
 	siteID, err := strconv.Atoi(c.SiteID)

@@ -5,12 +5,12 @@ import (
 	"slices"
 	"strconv"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/admin_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/go-playground/validator/v10"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/openuem-console/internal/models"
-	"github.com/open-uem/openuem-console/internal/views/admin_views"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 	"github.com/wneessen/go-mail"
 )
 
@@ -155,7 +155,7 @@ func sendEmailTest(settings *models.SMTPSettings, to string) error {
 	if err := m.To(to); err != nil {
 		return err
 	}
-	m.Subject("This is a test email from OpenUEM")
+	m.Subject("This is a test email from scnorionplus")
 
 	return c.DialAndSend(m)
 }

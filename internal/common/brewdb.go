@@ -31,7 +31,7 @@ func (w *Worker) StartBrewDBDownloadJob() error {
 }
 
 func (w *Worker) DownloaBrewDB() error {
-	url := "https://downloads.openuem.eu/brew/brew.db"
+	url := "https://downloads.scncore.com/brew/brew.db"
 
 	// If we're in development don't download
 	if os.Getenv("DEVEL") == "true" {

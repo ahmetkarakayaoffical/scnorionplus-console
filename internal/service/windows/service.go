@@ -7,16 +7,16 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/common"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/utils"
 	"github.com/go-co-op/gocron/v2"
-	"github.com/open-uem/openuem-console/internal/common"
-	"github.com/open-uem/utils"
 	"golang.org/x/sys/windows/svc"
 )
 
 func main() {
 	var err error
 
-	w := common.NewWorker("openuem-console-service.txt")
+	w := common.NewWorker("scnorionplus-console-service.txt")
 
 	// Start Task Scheduler
 	w.TaskScheduler, err = gocron.NewScheduler()
@@ -28,9 +28,9 @@ func main() {
 	log.Println("[INFO]: task scheduler has been started")
 
 	if err := w.GenerateConsoleConfig(); err != nil {
-		log.Printf("[ERROR]: could not generate config for OpenUEM console: %v", err)
+		log.Printf("[ERROR]: could not generate config for scnorionplus console: %v", err)
 		if err := w.StartGenerateConsoleConfigJob(); err != nil {
-			log.Fatalf("[FATAL]: could not start job to generate config for OpenUEM console: %v", err)
+			log.Fatalf("[FATAL]: could not start job to generate config for scnorionplus console: %v", err)
 		}
 	}
 
@@ -81,12 +81,12 @@ func main() {
 	}
 
 	// Configure the windows service
-	s := utils.NewOpenUEMWindowsService()
+	s := utils.NewscnorionplusWindowsService()
 	s.ServiceStart = w.StartWorker
 	s.ServiceStop = w.StopWorker
 
 	// Run service
-	if err := svc.Run("openuem-console-service", s); err != nil {
+	if err := svc.Run("scnorionplus-console-service", s); err != nil {
 		log.Printf("[ERROR]: could not run service: %v", err)
 	}
 }

@@ -7,13 +7,13 @@ import (
 	"strconv"
 	"strings"
 
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/admin_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/go-playground/validator/v10"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/models"
-	"github.com/open-uem/openuem-console/internal/views/admin_views"
-	"github.com/open-uem/openuem-console/internal/views/partials"
 )
 
 var UpdateChannels = []string{"stable", "devel", "testing"}
@@ -73,7 +73,7 @@ func (h *Handler) GeneralSettings(c echo.Context) error {
 		}
 
 		if settings.UpdateChannel != "" {
-			if err := h.Model.UpdateOpenUEMChannel(settings.ID, settings.UpdateChannel); err != nil {
+			if err := h.Model.UpdatescnorionplusChannel(settings.ID, settings.UpdateChannel); err != nil {
 				return RenderError(c, partials.ErrorMessage(err.Error(), true))
 			}
 		}
@@ -391,7 +391,7 @@ func (h *Handler) ChangeAgentFrequency(c echo.Context, settings *models.GeneralS
 		return RenderError(c, partials.ErrorMessage(i18n.T(c.Request().Context(), "nats.not_connected"), true))
 	}
 
-	config := openuem_nats.Config{}
+	config := scnorionplus_nats.Config{}
 	config.AgentFrequency = settings.AgentFrequency
 	config.WinGetFrequency = wingetFrequency
 	config.SFTPDisabled = sftpDisabled
@@ -407,7 +407,7 @@ func (h *Handler) ChangeAgentFrequency(c echo.Context, settings *models.GeneralS
 
 	if err := h.Model.UpdateAgentFrequency(settings.ID, settings.AgentFrequency); err != nil {
 		// Rollback communication
-		config := openuem_nats.Config{}
+		config := scnorionplus_nats.Config{}
 		config.AgentFrequency = currentFrequency
 		config.WinGetFrequency = wingetFrequency
 		config.SFTPDisabled = sftpDisabled
@@ -460,7 +460,7 @@ func (h *Handler) ChangeWingetFrequency(c echo.Context, settings *models.General
 		return RenderError(c, partials.ErrorMessage(i18n.T(c.Request().Context(), "nats.not_connected"), true))
 	}
 
-	config := openuem_nats.Config{}
+	config := scnorionplus_nats.Config{}
 	config.AgentFrequency = currentFrequency
 	config.WinGetFrequency = settings.WinGetFrequency
 	config.SFTPDisabled = sftpDisabled
@@ -476,7 +476,7 @@ func (h *Handler) ChangeWingetFrequency(c echo.Context, settings *models.General
 
 	if err := h.Model.UpdateWingetFrequency(settings.ID, settings.WinGetFrequency); err != nil {
 		// Rollback communication
-		config := openuem_nats.Config{}
+		config := scnorionplus_nats.Config{}
 		config.AgentFrequency = currentFrequency
 		config.WinGetFrequency = wingetFrequency
 		config.SFTPDisabled = sftpDisabled
@@ -529,7 +529,7 @@ func (h *Handler) ChangeSFTPSetting(c echo.Context, settings *models.GeneralSett
 		return RenderError(c, partials.ErrorMessage(i18n.T(c.Request().Context(), "nats.not_connected"), true))
 	}
 
-	config := openuem_nats.Config{}
+	config := scnorionplus_nats.Config{}
 	config.AgentFrequency = currentFrequency
 	config.WinGetFrequency = wingetFrequency
 	config.SFTPDisabled = settings.SFTPDisabled
@@ -545,7 +545,7 @@ func (h *Handler) ChangeSFTPSetting(c echo.Context, settings *models.GeneralSett
 
 	if err := h.Model.UpdateSFTPDisabled(settings.ID, settings.SFTPDisabled); err != nil {
 		// Rollback communication
-		config := openuem_nats.Config{}
+		config := scnorionplus_nats.Config{}
 		config.AgentFrequency = currentFrequency
 		config.WinGetFrequency = wingetFrequency
 		config.SFTPDisabled = sftpDisabled
@@ -603,7 +603,7 @@ func (h *Handler) ChangeRemoteAssistanceSetting(c echo.Context, settings *models
 		return RenderError(c, partials.ErrorMessage(i18n.T(c.Request().Context(), "nats.not_connected"), true))
 	}
 
-	config := openuem_nats.Config{}
+	config := scnorionplus_nats.Config{}
 	config.AgentFrequency = currentFrequency
 	config.WinGetFrequency = wingetFrequency
 	config.SFTPDisabled = sftpDisabled
@@ -619,7 +619,7 @@ func (h *Handler) ChangeRemoteAssistanceSetting(c echo.Context, settings *models
 
 	if err := h.Model.UpdateRemoteAssistanceDisabled(settings.ID, settings.RemoteAssistanceDisabled); err != nil {
 		// Rollback communication
-		config := openuem_nats.Config{}
+		config := scnorionplus_nats.Config{}
 		config.AgentFrequency = currentFrequency
 		config.WinGetFrequency = wingetFrequency
 		config.SFTPDisabled = sftpDisabled

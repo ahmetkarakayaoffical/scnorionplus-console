@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/ent"
-	"github.com/open-uem/ent/server"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/layout"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/server"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/layout"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"golang.org/x/mod/semver"
 	"strconv"
 )
 
-templ UpdateServers(c echo.Context, p partials.PaginationAndSort, f filters.UpdateServersFilter, servers []*ent.Server, allServers []string, higherRelease *ent.Server, latestServerRelease *openuem_nats.OpenUEMRelease, appliedReleases []string, allReleases []string, allStatus []string, refresh int, successMessage, errorMessage string, agentsExists, serversExists bool, commonInfo *partials.CommonInfo) {
+templ UpdateServers(c echo.Context, p partials.PaginationAndSort, f filters.UpdateServersFilter, servers []*ent.Server, allServers []string, higherRelease *ent.Server, latestServerRelease *scnorionplus_nats.scnorionplusRelease, appliedReleases []string, allReleases []string, allStatus []string, refresh int, successMessage, errorMessage string, agentsExists, serversExists bool, commonInfo *partials.CommonInfo) {
 	@partials.Header(c, []partials.Breadcrumb{{Title: i18n.T(ctx, "Global Config"), Url: "/admin/users"}, {Title: i18n.T(ctx, "admin.update.servers.title"), Url: "admin/update-servers"}}, commonInfo)
 	<main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
 		<div class="uk-width-1-2@m uk-card uk-card-default">

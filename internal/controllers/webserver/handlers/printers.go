@@ -1,8 +1,8 @@
 package handlers
 
 import (
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/printers_views"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/openuem-console/internal/views/printers_views"
 )
 
 func (h *Handler) NetworkPrinters(c echo.Context) error {

@@ -9,15 +9,15 @@ import (
 
 	"entgo.io/ent/dialect"
 	entsql "entgo.io/ent/dialect/sql"
+	ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/migrate"
+	"github.com/ahmetkarakayaoffical/ent/orgmetadata"
+	"github.com/ahmetkarakayaoffical/ent/profile"
+	"github.com/ahmetkarakayaoffical/ent/site"
+	"github.com/ahmetkarakayaoffical/ent/tag"
+	"github.com/ahmetkarakayaoffical/ent/tenant"
 	_ "github.com/jackc/pgx/v5/stdlib"
-	ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/migrate"
-	"github.com/open-uem/ent/orgmetadata"
-	"github.com/open-uem/ent/profile"
-	"github.com/open-uem/ent/site"
-	"github.com/open-uem/ent/tag"
-	"github.com/open-uem/ent/tenant"
 )
 
 type Model struct {

@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/enttest"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	"github.com/ahmetkarakayaoffical/ent/agent"
+	"github.com/ahmetkarakayaoffical/ent/enttest"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -53,9 +53,9 @@ func (suite *UpdatesTestSuite) SetupTest() {
 			SetOwnerID(fmt.Sprintf("agent%d", i))
 
 		if i%3 == 0 {
-			query.SetSystemUpdateStatus(openuem_nats.DISABLED)
+			query.SetSystemUpdateStatus(scnorionplus_nats.DISABLED)
 		} else {
-			query.SetSystemUpdateStatus(openuem_nats.NOTIFY_SCHEDULED_INSTALLATION)
+			query.SetSystemUpdateStatus(scnorionplus_nats.NOTIFY_SCHEDULED_INSTALLATION)
 		}
 
 		if i%2 == 0 {
@@ -107,7 +107,7 @@ func (suite *UpdatesTestSuite) TestUpdatesTestSuite() {
 	assert.NoError(suite.T(), err, "should count all system updates")
 	assert.Equal(suite.T(), 3, count, "should get 3 updates")
 
-	f = filters.SystemUpdatesFilter{UpdateStatus: []string{openuem_nats.NOTIFY_SCHEDULED_INSTALLATION}}
+	f = filters.SystemUpdatesFilter{UpdateStatus: []string{scnorionplus_nats.NOTIFY_SCHEDULED_INSTALLATION}}
 	count, err = suite.model.CountAllSystemUpdates(f, suite.commonInfo)
 	assert.NoError(suite.T(), err, "should count all system updates")
 	assert.Equal(suite.T(), 4, count, "should get 4 updates")

@@ -3,9 +3,9 @@ package models
 import (
 	"context"
 
-	ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/sessions"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/sessions"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 )
 
 func (m *Model) CountAllSessions() (int, error) {

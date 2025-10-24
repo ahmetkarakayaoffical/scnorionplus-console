@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/ahmetkarakayaoffical/utils"
 	"github.com/go-co-op/gocron/v2"
-	"github.com/open-uem/utils"
 )
 
 func (w *Worker) GetServerReleases() error {

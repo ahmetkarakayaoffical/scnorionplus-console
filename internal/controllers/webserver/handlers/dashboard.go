@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/charts"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/dashboard_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
 	"github.com/labstack/echo/v4"
-	"github.com/open-uem/openuem-console/internal/views/charts"
-	"github.com/open-uem/openuem-console/internal/views/dashboard_views"
-	"github.com/open-uem/openuem-console/internal/views/filters"
 )
 
 func (h *Handler) Dashboard(c echo.Context) error {
@@ -32,10 +32,10 @@ func (h *Handler) Dashboard(c echo.Context) error {
 	r, err := h.Model.GetLatestAgentRelease(channel)
 	if err != nil {
 		log.Println("[ERROR]: could not get latest version information")
-		data.OpenUEMUpdaterAPIStatus = "down"
+		data.scnorionplusUpdaterAPIStatus = "down"
 		data.NUpgradableAgents = 0
 	} else {
-		data.OpenUEMUpdaterAPIStatus = "up"
+		data.scnorionplusUpdaterAPIStatus = "up"
 		data.NUpgradableAgents, err = h.Model.CountUpgradableAgents(r.Version)
 		if err != nil {
 			return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
@@ -113,7 +113,7 @@ func (h *Handler) Dashboard(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	data.NOpenUEMUsers, err = h.Model.CountAllUsers(filters.UserFilter{})
+	data.NscnorionplusUsers, err = h.Model.CountAllUsers(filters.UserFilter{})
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}

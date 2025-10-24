@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/authserver"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/sessions"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/controllers/webserver"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models"
 	"github.com/go-co-op/gocron/v2"
-	"github.com/open-uem/openuem-console/internal/controllers/authserver"
-	"github.com/open-uem/openuem-console/internal/controllers/sessions"
-	"github.com/open-uem/openuem-console/internal/controllers/webserver"
-	"github.com/open-uem/openuem-console/internal/models"
 )
 
 func (w *Worker) StartDBConnectJob() error {
@@ -60,7 +60,7 @@ func (w *Worker) StartDBConnectJob() error {
 
 		w.StartConsoleService()
 
-		// Start a job to check latest OpenUEM releases
+		// Start a job to check latest scnorionplus releases
 		channel, err := w.Model.GetDefaultUpdateChannel()
 		if err != nil {
 			log.Println("[ERROR]: could not get updates channel settings")
@@ -133,7 +133,7 @@ func (w *Worker) StartDBConnectJob() error {
 
 				w.StartConsoleService()
 
-				// Start a job to check latest OpenUEM releases
+				// Start a job to check latest scnorionplus releases
 				channel, err := w.Model.GetDefaultUpdateChannel()
 				if err != nil {
 					log.Println("[ERROR]: could not get updates channel settings")

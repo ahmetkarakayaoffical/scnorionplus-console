@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	ent "github.com/open-uem/ent"
-	"github.com/open-uem/ent/user"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	ent "github.com/ahmetkarakayaoffical/ent"
+	"github.com/ahmetkarakayaoffical/ent/user"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 )
 
 func (m *Model) CountAllUsers(f filters.UserFilter) (int, error) {
@@ -97,7 +97,7 @@ func (m *Model) AddUser(uid, name, email, phone, country string, oidc bool) erro
 	query := m.Client.User.Create().SetID(uid).SetName(name).SetEmail(email).SetPhone(phone).SetCountry(country).SetOpenid(oidc).SetCreated(time.Now())
 
 	if oidc {
-		query.SetEmailVerified(true).SetRegister(openuem_nats.REGISTER_IN_REVIEW)
+		query.SetEmailVerified(true).SetRegister(scnorionplus_nats.REGISTER_IN_REVIEW)
 	}
 
 	return query.Exec(context.Background())
@@ -107,16 +107,16 @@ func (m *Model) AddImportedUser(uid, name, email, phone, country string, oidc bo
 	query := m.Client.User.Create().SetID(uid).SetName(name).SetEmail(email).SetPhone(phone).SetCountry(country).SetOpenid(oidc).SetCreated(time.Now())
 
 	if oidc {
-		query.SetRegister(openuem_nats.REGISTER_IN_REVIEW)
+		query.SetRegister(scnorionplus_nats.REGISTER_IN_REVIEW)
 	} else {
-		query.SetRegister(openuem_nats.REGISTER_CERTIFICATE_SENT)
+		query.SetRegister(scnorionplus_nats.REGISTER_CERTIFICATE_SENT)
 	}
 
 	return query.Exec(context.Background())
 }
 
 func (m *Model) AddOIDCUser(uid, name, email, phone string, emailVerified bool) error {
-	_, err := m.Client.User.Create().SetID(uid).SetName(name).SetEmail(email).SetPhone(phone).SetEmailVerified(emailVerified).SetCreated(time.Now()).SetRegister(openuem_nats.REGISTER_APPROVED).SetOpenid(true).Save(context.Background())
+	_, err := m.Client.User.Create().SetID(uid).SetName(name).SetEmail(email).SetPhone(phone).SetEmailVerified(emailVerified).SetCreated(time.Now()).SetRegister(scnorionplus_nats.REGISTER_APPROVED).SetOpenid(true).Save(context.Background())
 	if err != nil {
 		return err
 	}
@@ -142,15 +142,15 @@ func (m *Model) GetUserById(uid string) (*ent.User, error) {
 }
 
 func (m *Model) ConfirmEmail(uid string) error {
-	return m.Client.User.Update().SetEmailVerified(true).SetRegister(openuem_nats.REGISTER_IN_REVIEW).Where(user.ID(uid)).Exec(context.Background())
+	return m.Client.User.Update().SetEmailVerified(true).SetRegister(scnorionplus_nats.REGISTER_IN_REVIEW).Where(user.ID(uid)).Exec(context.Background())
 }
 
 func (m *Model) UserSetRevokedCertificate(uid string) error {
-	return m.Client.User.Update().SetRegister(openuem_nats.REGISTER_REVOKED).Where(user.ID(uid)).Exec(context.Background())
+	return m.Client.User.Update().SetRegister(scnorionplus_nats.REGISTER_REVOKED).Where(user.ID(uid)).Exec(context.Background())
 }
 
 func (m *Model) ConfirmLogIn(uid string) error {
-	return m.Client.User.Update().SetRegister(openuem_nats.REGISTER_COMPLETE).SetCertClearPassword("").Where(user.ID(uid)).Exec(context.Background())
+	return m.Client.User.Update().SetRegister(scnorionplus_nats.REGISTER_COMPLETE).SetCertClearPassword("").Where(user.ID(uid)).Exec(context.Background())
 }
 
 func (m *Model) DeleteUser(uid string) error {

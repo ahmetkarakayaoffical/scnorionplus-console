@@ -14,11 +14,11 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/invopop/ctxi18n/i18n"
 	"github.com/labstack/echo/v4"
-	openuem_ent "github.com/open-uem/ent"
-	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-console/internal/views/admin_views"
-	"github.com/open-uem/openuem-console/internal/views/filters"
-	"github.com/open-uem/openuem-console/internal/views/partials"
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
+	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/admin_views"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
 	"golang.org/x/crypto/ocsp"
 	"software.sslmate.com/src/go-pkcs12"
 )
@@ -81,7 +81,7 @@ func (h *Handler) ListUsers(c echo.Context, successMessage, errMessage string) e
 	}
 
 	filteredRegisterStatus := []string{}
-	for index := range openuem_nats.RegisterPossibleStatus() {
+	for index := range scnorionplus_nats.RegisterPossibleStatus() {
 		value := c.FormValue(fmt.Sprintf("filterByRegisterStatus%d", index))
 		if value != "" {
 			filteredRegisterStatus = append(filteredRegisterStatus, value)
@@ -214,7 +214,7 @@ func (h *Handler) RequestUserCertificate(c echo.Context) error {
 	return h.ListUsers(c, successMessage, "")
 }
 
-func (h *Handler) SendCertificateRequestToNATS(c echo.Context, user *openuem_ent.User) error {
+func (h *Handler) SendCertificateRequestToNATS(c echo.Context, user *scnorionplus_ent.User) error {
 	userCertYears, err := h.Model.GetDefaultUserCertDuration()
 	if err != nil {
 		return err
@@ -225,7 +225,7 @@ func (h *Handler) SendCertificateRequestToNATS(c echo.Context, user *openuem_ent
 		consoleUrl = h.ReverseProxyServer
 	}
 
-	certRequest := openuem_nats.CertificateRequest{
+	certRequest := scnorionplus_nats.CertificateRequest{
 		Username:   user.ID,
 		FullName:   user.Name,
 		Email:      user.Email,
@@ -269,7 +269,7 @@ func (h *Handler) DeleteUser(c echo.Context) error {
 	// Revoke certificate
 	cert, err := h.Model.GetCertificateByUID(uid)
 	if err != nil {
-		if !openuem_ent.IsNotFound(err) {
+		if !scnorionplus_ent.IsNotFound(err) {
 			return RenderError(c, partials.ErrorMessage(err.Error(), false))
 		}
 		successMessage := i18n.T(c.Request().Context(), "users.deleted")
@@ -316,7 +316,7 @@ func (h *Handler) RenewUserCertificate(c echo.Context) error {
 	if h.ReverseProxyServer != "" {
 		consoleUrl = h.ReverseProxyServer
 	}
-	certRequest := openuem_nats.CertificateRequest{
+	certRequest := scnorionplus_nats.CertificateRequest{
 		Username:   user.ID,
 		FullName:   user.Name,
 		Email:      user.Email,
@@ -353,7 +353,7 @@ func (h *Handler) SetEmailConfirmed(c echo.Context) error {
 		return RenderError(c, partials.ErrorMessage("user doesn't exist", false))
 	}
 
-	err = h.Model.Client.User.UpdateOneID(uid).SetEmailVerified(true).SetRegister(openuem_nats.REGISTER_IN_REVIEW).Exec(context.Background())
+	err = h.Model.Client.User.UpdateOneID(uid).SetEmailVerified(true).SetRegister(scnorionplus_nats.REGISTER_IN_REVIEW).Exec(context.Background())
 	if err != nil {
 		return RenderError(c, partials.ErrorMessage(err.Error(), false))
 	}
@@ -372,7 +372,7 @@ func (h *Handler) ApproveAccount(c echo.Context) error {
 		return RenderError(c, partials.ErrorMessage("user doesn't exist", false))
 	}
 
-	err = h.Model.Client.User.UpdateOneID(uid).SetRegister(openuem_nats.REGISTER_APPROVED).Exec(context.Background())
+	err = h.Model.Client.User.UpdateOneID(uid).SetRegister(scnorionplus_nats.REGISTER_APPROVED).Exec(context.Background())
 	if err != nil {
 		return RenderError(c, partials.ErrorMessage(err.Error(), false))
 	}
@@ -439,17 +439,17 @@ func (h *Handler) EditUser(c echo.Context) error {
 	return RenderView(c, admin_views.UsersIndex(" | Users", admin_views.EditUser(c, user, defaultCountry, agentsExists, serversExists, commonInfo, settings), commonInfo))
 }
 
-func sendConfirmationEmail(h *Handler, c echo.Context, user *openuem_ent.User) error {
+func sendConfirmationEmail(h *Handler, c echo.Context, user *scnorionplus_ent.User) error {
 	token, err := h.generateConfirmEmailToken(user.ID)
 	if err != nil {
 		return err
 	}
 
-	notification := openuem_nats.Notification{
+	notification := scnorionplus_nats.Notification{
 		To:               user.Email,
 		Subject:          "Please, confirm your email address",
-		MessageTitle:     "OpenUEM | Verify your email address",
-		MessageText:      "Please, confirm your email address so that it can be used to receive emails from OpenUEM",
+		MessageTitle:     "scnorionplus | Verify your email address",
+		MessageText:      "Please, confirm your email address so that it can be used to receive emails from scnorionplus",
 		MessageGreeting:  fmt.Sprintf("Hi %s", user.Name),
 		MessageAction:    "Confirm email",
 		MessageActionURL: c.Request().Header.Get("Origin") + "/auth/confirm/" + token,
@@ -499,7 +499,7 @@ func (h *Handler) ImportUsers(c echo.Context) error {
 			return RenderError(c, partials.ErrorMessage(err.Error(), false))
 		}
 
-		user := openuem_ent.User{}
+		user := scnorionplus_ent.User{}
 
 		if len(record) != 6 {
 			return RenderError(c, partials.ErrorMessage(i18n.T(c.Request().Context(), "users.import_error_wrong_format", index), false))
