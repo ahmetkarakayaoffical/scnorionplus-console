@@ -3,8 +3,8 @@ package common
 import (
 	"log"
 
+	"github.com/ahmetkarakayaoffical/nats"
 	models "github.com/ahmetkarakayaoffical/scnorionplus-console/internal/models/winget"
-	"github.com/open-uem/nats"
 )
 
 func (w *Worker) StartCommonPackagesDBJob() error {

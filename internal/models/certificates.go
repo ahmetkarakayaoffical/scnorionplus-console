@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"time"
 
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
 	"github.com/ahmetkarakayaoffical/ent/certificate"
 	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
 	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
-	scnorionplus_ent "github.com/open-uem/ent"
 )
 
 func (m *Model) GetCertificateByUID(uid string) (*scnorionplus_ent.Certificate, error) {

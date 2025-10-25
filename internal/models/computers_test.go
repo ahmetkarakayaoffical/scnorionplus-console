@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
+	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
 	"github.com/ahmetkarakayaoffical/ent/agent"
 	"github.com/ahmetkarakayaoffical/ent/enttest"
 	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/filters"
 	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/views/partials"
-	scnorionplus_ent "github.com/open-uem/ent"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
