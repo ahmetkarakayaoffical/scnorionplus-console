@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	ent "github.com/ahmetkarakayaoffical//ent"
+	ent "github.com/ahmetkarakayaoffical/ent"
 	"github.com/ahmetkarakayaoffical/ent/agent"
 	"github.com/ahmetkarakayaoffical/ent/deployment"
 	"github.com/ahmetkarakayaoffical/ent/site"
