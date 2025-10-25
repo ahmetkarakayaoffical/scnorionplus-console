@@ -5,7 +5,7 @@ import (
 
 	scnorionplus_ent "github.com/ahmetkarakayaoffical/ent"
 	"github.com/ahmetkarakayaoffical/ent/release"
-	"github.com/ahmetkarakayaofficalent/agent"
+	"github.com/ahmetkarakayaoffical/ent/agent"
 	scnorionplus_nats "github.com/ahmetkarakayaoffical/nats"
 )
 

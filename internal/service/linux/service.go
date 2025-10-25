@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/ahmetkarakayaoffical/scnorionplus-console//internal/common"
+	"github.com/ahmetkarakayaoffical/scnorionplus-console/internal/common"
 	"github.com/go-co-op/gocron/v2"
 )
 
